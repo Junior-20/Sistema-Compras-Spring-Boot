@@ -2,7 +2,6 @@ package com.Compras.Web.Controladores;
 
 import com.Compras.Web.Entidadades.Departamento;
 import com.Compras.Web.Servicios.DepartamentoService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -20,33 +19,33 @@ public class DepartamentoController {
     private DepartamentoService db;
  
     @GetMapping({"Departamentos","/"})
-    public String listarDepartamentos(Model model, @Param("keyWord") String KeyWord) {
+    public String ListarDepartamentos(Model model, @Param("keyWord") String KeyWord) {
         model.addAttribute("Departamentos", db.listarDepartamentos(KeyWord));
         model.addAttribute("KeyWork",KeyWord);
         return "Departamentos";
     }
 
     @GetMapping("/Departamentos/nuevo")
-    public String registrarCarro(Model modelo) {
+    public String RegistrarDepartamento(Model modelo) {
         Departamento Dep = new Departamento();
         modelo.addAttribute("Dep", Dep);
         return "Formulario";
     }
 
     @PostMapping("Departamentos")
-    public String guardarCarro(@ModelAttribute("Departamento") Departamento departamento) {
+    public String GuardarDepartamento(@ModelAttribute("Departamento") Departamento departamento) {
         db.guardarDepartamento(departamento);
         return "redirect:Departamentos";
     }
 
     @GetMapping("/Departamentos/editar/{id}")
-    public String mostrarFormularioDeEditar(@PathVariable Long id, Model modelo) {
+    public String MostrarFormularioDeEditar(@PathVariable Long id, Model modelo) {
         modelo.addAttribute("Departamento", db.obtenerDepartamentoId(id));
         return "editar_Departamento";
     }
 
     @PostMapping("/Departamentos/{id}")
-    public String actualizarDepartamento(@PathVariable Long id, @ModelAttribute("carro") Departamento departamento) {
+    public String ActualizarDepartamento(@PathVariable Long id, @ModelAttribute("Departamento") Departamento departamento) {
         Departamento Existente = db.obtenerDepartamentoId(id);
         Existente.setId(id);
         Existente.setNombre(departamento.getNombre());
@@ -57,7 +56,7 @@ public class DepartamentoController {
     }
 
     @GetMapping("/Departamentos/{id}")
-    public String eliminarDepartamento(@PathVariable Long id) {
+    public String EliminarDepartamento(@PathVariable Long id) {
         db.eliminarDepartamento(id);
         return "redirect:/Departamentos";
     }

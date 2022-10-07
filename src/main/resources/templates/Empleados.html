@@ -2,23 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="Layout/Layout.html :: head">
     <meta charset="UTF-8">
-    <title>Departamentos</title>
+    <title>Empleados</title>
 </head>
 <body>
 <header th:replace="Layout/Layout.html :: header"></header>
 <div class="container">
     <div class="row">
         <div class="container text-center">
-            <h1>Lista de Departamentos</h1>
+            <h1>Lista de Empleados</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <a th:href="@{/Departamentos/nuevo}" class="btn btn-success btn-sm mb3">Agregar Departamentos</a>
+            <a th:href="@{/Empleados/nuevo}" class="btn btn-success btn-sm mb3">Agregar Empleado</a>
         </div>
     <br>
     <div class="container text-center">
-        <form class="form-inline" th:action="@{/Departamentos}">
+        <form class="form-inline" th:action="@{/Empleados}">
             <div class="form-group mb-2">
                 <label>Buscar:</label>
             </div>
@@ -36,21 +36,25 @@
         <thead class="table-dark">
         <tr>
             <th>ID</th>
+            <th>Cédula</th>
             <th>Nombre</th>
+            <th>Departamento</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="departamento : ${Departamentos}">
-            <td th:text="${departamento.id}">Descripción</td>
-            <td th:text="${departamento.nombre}"></td>
-            <td th:text="${departamento.estado}">Marca</td>
-                <td>
-                    <a th:href="@{/Departamentos/editar/{id}(id=${departamento.id})}" class="btn btn-info">Editar</a>
-                    <a th:href="@{/Departamentos/{id}(id=${departamento.id})}" class="btn btn-danger">Eliminar</a>
+        <tr th:each="Empleado : ${Empleados}">
+            <td th:text="${Empleado.id}"></td>
+            <td th:text="${Empleado.cedula}"></td>
+            <td th:text="${Empleado.nombre}"></td>
+            <td th:text="${Empleado.departamento.nombre}"></td>
+            <td th:text="${Empleado.estado}"></td>
+            <td>
+                <a th:href="@{/Empleados/editar/{id}(id=${Empleado.id})}" class="btn btn-info">Editar</a>
+                <a th:href="@{/Empleados/{id}(id=${Empleado.id})}" class="btn btn-danger">Eliminar</a>
 
-                </td>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -58,7 +62,7 @@
 </div>
     <script type="text/javascript">
         function Refrescar(){
-            window.location='/Departamentos';
+            window.location='/Empleados';
         }
     </script>
 </body>

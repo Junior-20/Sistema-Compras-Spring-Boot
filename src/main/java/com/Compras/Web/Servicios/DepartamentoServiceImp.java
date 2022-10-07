@@ -10,34 +10,34 @@ import java.util.List;
 @Service
 public class DepartamentoServiceImp implements  DepartamentoService {
 
-        @Autowired
-        private DepartamentoRepository db;
+    @Autowired
+    DepartamentoRepository db;
 
-        @RequestMapping
-        public List<Departamento> listarDepartamentos(String keyWord) {
-            if(keyWord!=null){
-                return db.findAll(keyWord);
-            }
-            return db.findAll();
+    @Override
+    public List<Departamento> listarDepartamentos(String keyWord) {
+        if(keyWord!=null){
+            return db.findAll(keyWord);
         }
+        return db.findAll();
+    }
 
-        @Override
-        public Departamento guardarDepartamento(Departamento departamento) {
-            return db.save(departamento);
-        }
+    @Override
+    public Departamento guardarDepartamento(Departamento departamento) {
+        return db.save(departamento);
+    }
 
-        @Override
-        public Departamento obtenerDepartamentoId(Long id) {
-            return db.findById(id).get();
-        }
+    @Override
+    public Departamento obtenerDepartamentoId(Long id) {
+        return db.findById(id).get();
+    }
 
-        @Override
-        public Departamento actualizarDepartamento(Departamento departamento) {
-            return db.save(departamento);
-        }
+    @Override
+    public Departamento actualizarDepartamento(Departamento departamento) {
+        return db.save(departamento);
+    }
 
-        @Override
-        public void eliminarDepartamento(Long id) {
-            db.deleteById(id);
-        }
+    @Override
+    public void eliminarDepartamento(Long id) {
+  db.deleteById(id);
+    }
 }

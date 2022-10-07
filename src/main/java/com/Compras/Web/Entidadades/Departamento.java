@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Departamento_id", unique = true)
     private Long id;
     @Column(name = "Nombre",nullable = false,length = 50)
     private String Nombre;

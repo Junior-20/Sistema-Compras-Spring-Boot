@@ -2,14 +2,13 @@ package com.Compras.Web.Controladores;
 
 import com.Compras.Web.Entidadades.Departamento;
 import com.Compras.Web.Servicios.DepartamentoService;
+import net.bytebuddy.asm.Advice;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
 
@@ -18,7 +17,7 @@ public class DepartamentoController {
     @Autowired
     private DepartamentoService db;
  
-    @GetMapping({"Departamentos","/"})
+    @GetMapping({"Departamentos"})
     public String ListarDepartamentos(Model model, @Param("keyWord") String KeyWord) {
         model.addAttribute("Departamentos", db.listarDepartamentos(KeyWord));
         model.addAttribute("KeyWork",KeyWord);
@@ -57,8 +56,13 @@ public class DepartamentoController {
 
     @GetMapping("/Departamentos/{id}")
     public String EliminarDepartamento(@PathVariable Long id) {
-        db.eliminarDepartamento(id);
-        return "redirect:/Departamentos";
+        try{
+            db.eliminarDepartamento(id);
+        }
+        catch(ConstraintViolationException e ){
+            JOptionPane.showMessageDialog(null,"Datos Relacionados!!!!!", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+            return "redirect:/Departamentos";
     }
 }
 

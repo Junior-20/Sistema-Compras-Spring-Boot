@@ -22,6 +22,12 @@
             <label>Nombre : </label>
             <input type="text" name="cedula" th:field="*{nombre}" class="form-control" placeholder="Digite el Nombre" required>
           </div>
+          <select th:field="*{departamento}" class="form-control" required>
+            <th:block th:each="Departamento: ${Departamentolist}">
+              <option th:text="${Departamento.nombre}" th:value="${Departamento.id}">
+              </option>
+            </th:block>
+          </select>
           <div class="form-group">
           <select th:field="*{estado}" class="form-control" required >
             <option th:text="Activo" th:value="Activo">

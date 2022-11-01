@@ -45,6 +45,8 @@ public class EmpleadoController {
     @GetMapping("/Empleados/editar/{id}")
     public String MostrarFormularioDeEditar(@PathVariable Long id, Model modelo) {
         modelo.addAttribute("Empleado", db.ObtenerEmpleadoId(id));
+        List<Departamento> Departamentolist = dp.findAll();
+        modelo.addAttribute("Departamentolist", Departamentolist);
         return "Editar_Empleado";
     }
 
@@ -56,6 +58,7 @@ public class EmpleadoController {
         Existente.setCedula(empleado.getCedula());
         Existente.setNombre(empleado.getNombre());
         Existente.setEstado(empleado.getEstado());
+        Existente.setDepartamento(empleado.getDepartamento());
 
         model.addAttribute("Departamentolist", Departamentolist);
         db.ActualizarEmpleado(Existente);

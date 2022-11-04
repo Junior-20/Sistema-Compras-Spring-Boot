@@ -1,10 +1,8 @@
 package com.Compras.Web.Controladores;
-
 import com.Compras.Web.Entidadades.Departamento;
 import com.Compras.Web.Entidadades.Empleado;
 import com.Compras.Web.Repositorios.DepartamentoRepository;
 import com.Compras.Web.Servicios.EmpleadoServices;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -13,10 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.swing.*;
 import java.util.List;
-
 @Controller
 public class EmpleadoController {
     @Autowired
@@ -66,12 +61,8 @@ public class EmpleadoController {
     }
     @GetMapping("/Empleados/{id}")
     public String EliminarEmpleado(@PathVariable Long id) {
-        try{
-            db.EliminarEmpleado(id);
-           }
-        catch(ConstraintViolationException e ){
-            JOptionPane.showMessageDialog(null,"Datos Relacionados!!!!!", "Error",JOptionPane.ERROR_MESSAGE);
-        }
+
+        db.EliminarEmpleado(id);
         return "redirect:/Empleados";
     }
 

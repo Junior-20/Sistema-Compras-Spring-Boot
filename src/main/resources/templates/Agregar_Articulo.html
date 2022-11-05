@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout/Layout.html :: head">
+  <meta charset="UTF-8">
+  <title>Articulos</title>
+</head>
+<body>
+<header th:replace="Layout/Layout.html :: header"></header>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+      <h2 class="text-center">Registro de Articulos</h2>
+      <div class="card-body">
+        <form th:action="@{/Articulos}" th:object="${art}" method="POST">
+          <div class="form-group">
+            <label>Nombre : </label>
+            <input type="text" name="Descripcion" th:field="*{descripcion}" class="form-control" placeholder="Digite el Nombre " required>
+          </div>
+          <div class="form-group">
+            <label>Marca: </label>
+            <select th:field="*{marca}" class="form-control" required>
+              <th:block th:each="Marca: ${Marcalist}">
+                <option th:text="${Marca.descripcion}" th:value="${Marca.id}">
+                </option>
+              </th:block>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Unidad: </label>
+            <select th:field="*{unidad}" class="form-control" required>
+              <th:block th:each="Unidad: ${Unidadlist}">
+                <option th:text="${Unidad.descripcion}" th:value="${Unidad.id}">
+                </option>
+              </th:block>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Existencia : </label>
+            <input type="number" name="Existencia" th:field="*{existencia}" class="form-control" placeholder="Digite la Cantidad " required>
+          </div>
+          <div class="form-group">
+          <select th:field="*{estado}" class="form-control" required >
+            <option th:text="Activo" th:value="Activo">
+            <option th:text="Inactivo" th:value="Inativo">
+            </option>
+          </select>
+            </div>
+          <button id="submit" class="btn btn-primary btn-block">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

@@ -76,5 +76,4 @@ public class ArticuloController {
         db.Eliminararticulo(id);
         return "redirect:/Articulos";
     }
-
 }
